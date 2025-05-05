@@ -23,7 +23,7 @@
       text-align: center;
     }
         input[type="text"] {
-      width: 100%;
+      width: 300px;
       padding: 12px;
       font-size: 16px;
       margin: 10px 0;
@@ -63,7 +63,8 @@
 <div class="card">
     <h1>👋 Welcome <span id="username">User</span></h1>
     <p>You currently have <span class="points" id="points">0</span> points</p>
-    <input type="text" id="codeInput" placeholder="Enter code from cup or receipt..." />
+    <input type="text" id="inputNumber" placeholder="Enter phone number" />
+    <input type="text" id="codeInput" placeholder="Enter code from can" />
     <button class="button" onclick="claimPoint()">Claim Point</button>
     <button class="button" onclick="checkPoints()">Check My Points</button>
 </div>
