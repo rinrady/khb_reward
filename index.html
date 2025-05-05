@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Loyalty Mini App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f0f8ff;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .button {
+      background-color: #0088cc;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+    }
+    .button:hover {
+      background-color: #0074b0;
+    }
+    .reward-list {
+      list-style: none;
+      padding: 0;
+    }
+    .reward-item {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    .points {
+      font-size: 20px;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<div class="card">
+    <h1>👋 Welcome <span id="username">User</span></h1>
+    <p>You currently have <span class="points" id="points">0</span> points</p>
+    <button class="button" onclick="claimPoint()">Claim Point</button>
+    <button class="button" onclick="checkPoints()">Check My Points</button>
+</div>
+
+<div class="card">
+    <h2>🎁 Rewards</h2>
+    <ul class="reward-list" id="reward-list">
+        <li class="reward-item">Free Coffee – 10 Points</li>
+        <li class="reward-item">T-Shirt – 25 Points</li>
+        <li class="reward-item">Gift Card – 50 Points</li>
+    </ul>
+</div>
+
+<script>
+    const tg = window.Telegram.WebApp;
+    tg.expand();
+
+    const username = tg.initDataUnsafe?.user?.first_name || "User";
+    document.getElementById("username").innerText = username;
+
+    // Simulated points value (should come from backend)
+    let points = 0;
+
+    function claimPoint() {
+      points += 1;
+      document.getElementById("points").innerText = points;
+      tg.sendData(JSON.stringify({ action: "claim_point", currentPoints: points }));
+    }
+
+    function checkPoints() {
+      tg.sendData(JSON.stringify({ action: "check_points" }));
+      alert(`You have ${points} points`);
+    }
+  </script>
+</body>
+</html>
